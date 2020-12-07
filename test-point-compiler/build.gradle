@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+dependencies {
+    implementation project(':test-point-annotation')
+    // 用于自动为 JAVA Processor 生成 META-INF 信息。
+    compileOnly 'com.google.auto.service:auto-service-annotations:1.0-rc7'// 用compileOnly，只编译时用
+    annotationProcessor 'com.google.auto.service:auto-service:1.0-rc7'
+    // 快速生成.java文件的库
+    implementation 'com.squareup:javapoet:1.13.0'// 用implementation
+}

@@ -1,0 +1,7 @@
+include ':test-point-compiler'
+include ':test-point-api'
+include ':test-point-annotation'
+include ':module-kotlin'
+include ':module-java'
+include ':app'
+rootProject.name = "TestPoint"
