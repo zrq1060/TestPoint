@@ -14,6 +14,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        TestEntryPointInit.init("app");
+        TestEntryPointInit.init("app", "module-java", "module-kotlin");
     }
 }

@@ -3,7 +3,11 @@
     package="com.zrq.test.point">
 
     <application>
-        <activity android:name=".TestListActivity" />
-        <activity android:name=".TestDesActivity" />
+        <activity
+            android:name=".TestListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TestDesActivity"
+            android:screenOrientation="portrait" />
     </application>
 </manifest>

@@ -11,16 +11,17 @@ import java.util.Collection;
  * createTime 2020/12/7 14:23
  */
 public class TestEntryPointInit {
-    private static ArrayList<TestEntryPointInfo> allModuleTestEntryPointInfoList = new ArrayList<>();
+    private static final ArrayList<TestEntryPointInfo> allModuleTestEntryPointInfoList = new ArrayList<>();
 
     public static void init(String... moduleNames) {
         if (moduleNames == null || moduleNames.length == 0) {
             return;
         }
-        for (String methodName : moduleNames) {
+        for (String moduleName : moduleNames) {
             try {
-                Class<?> helperClass = Class.forName("com.example.runtime." + methodName + ".TestEntryPointHelper");
-                Method getAllTestEntryPointInfoMethod = helperClass.getMethod("getAllTestEntryPointInfo");
+                Class<?> helperClass = Class.forName(Constants.HELPER_PACKAGE_PREFIX
+                        + moduleName.replaceAll("[-_]", ".") + "." + Constants.HELPER_CLASS_NAME);// replaceAll解决名称含有[-][_]
+                Method getAllTestEntryPointInfoMethod = helperClass.getMethod(Constants.HELPER_METHOD_NAME);
                 allModuleTestEntryPointInfoList.addAll((Collection<TestEntryPointInfo>) getAllTestEntryPointInfoMethod.invoke(helperClass));
             } catch (Exception e) {
                 e.printStackTrace();

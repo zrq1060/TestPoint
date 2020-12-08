@@ -2,4 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zrq.test.point.demo.kotlin">
 
+    <application>
+        <activity android:name=".activity.Activity1" />
+        <activity android:name=".activity.Activity2" />
+    </application>
+
 </manifest>
