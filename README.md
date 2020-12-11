@@ -148,6 +148,6 @@ public class MyTestListActivity extends TestListActivity {
 
 ## 沟通和交流
 
-**QQ 交流群：**793823227
+**QQ 交流群：** 793823227
 
-**QQ：**273902141
+**QQ：** 273902141
