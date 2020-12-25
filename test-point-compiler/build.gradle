@@ -1,5 +1,6 @@
 plugins {
     id 'java-library'
+    id 'com.github.panpf.bintray-publish'
 }
 
 java {
@@ -7,10 +8,23 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_7
 }
 dependencies {
-    implementation project(':test-point-annotation')
+    // test-point-annotation
+    api project(':test-point-annotation')// 用api，使其引入此库时【引入】此依赖项
     // 用于自动为 JAVA Processor 生成 META-INF 信息。
     compileOnly 'com.google.auto.service:auto-service-annotations:1.0-rc7'// 用compileOnly，只编译时用
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc7'
     // 快速生成.java文件的库
     implementation 'com.squareup:javapoet:1.13.0'// 用implementation
+}
+
+publish {
+    userOrg = 'zrq'
+    repoName = "TestPoint"
+
+    desc = 'This is a test-point-compiler library'
+    website = 'https://github.com/zrq1060/TestPoint'
+
+    groupId = 'com.zrq'
+    artifactId = 'test-point-compiler'
+    publishVersion = "$publish_version"
 }

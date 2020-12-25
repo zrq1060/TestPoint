@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="test_list_item_title_padding">15dp</dimen>
+    <dimen name="test_list_item_title_text_size">15sp</dimen>
+
+    <dimen name="test_list_item_content_padding">10dp</dimen>
+    <dimen name="test_list_item_content_text_size">13sp</dimen>
+    <dimen name="test_list_item_content_margin">5dp</dimen>
+
+</resources>

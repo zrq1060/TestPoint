@@ -6,13 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 描述：标记要测试的点（Activity、Fragment、method）
+ * 描述：标记要测试的列表Fragment
  *
  * @author zhangrq
- * createTime 2020/12/7 16:17
+ * createTime 2020/12/22 15:17
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TestEntryPoint {
-    String value();
+public @interface TestEntryPointListFragment {
 }

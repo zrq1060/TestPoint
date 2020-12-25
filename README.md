@@ -67,7 +67,7 @@ public class MineActivity extends Fragment {
 ### 3.指定启动TestListActivity
 
 ```
-<activity android:name="com.zrq.test.point.TestListActivity">
+<activity android:name="com.zrq.test.point.list.TestListActivity">
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

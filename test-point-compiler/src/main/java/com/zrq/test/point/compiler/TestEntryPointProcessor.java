@@ -26,7 +26,7 @@ import javax.lang.model.element.VariableElement;
 import javax.tools.Diagnostic;
 
 /**
- * 描述：
+ * 描述：生成获取带有【TestEntryPoint】标注信息列表的Helper类
  *
  * @author zhangrq
  * createTime 2020/12/7 16:20
@@ -38,28 +38,24 @@ public class TestEntryPointProcessor extends AbstractProcessor {
     @Override
     public synchronized void init(ProcessingEnvironment processingEnv) {
         super.init(processingEnv);
-        testModelName = processingEnv.getOptions().get("TEST_MODULE_NAME");
-        printMessageInfo("init=testModelName=" + testModelName);
+        testModelName = processingEnv.getOptions().get(Constants.TEST_MODULE_NAME);
         if (testModelName == null || testModelName.length() == 0) {
             // 未设置TEST_MODEL_NAME，报错提醒
-            printMessageError("TestEntryPoint module未设置TEST_MODEL_NAME", null);
+            printMessageError("此 module【build.gradle】未设置【" + Constants.TEST_MODULE_NAME + "】参数", null);
         }
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-        printMessageInfo("process=start");
         Set<? extends Element> elements = roundEnv.getElementsAnnotatedWith(TestEntryPoint.class);
         if (elements != null && elements.size() > 0) {
             // 有数据，创建类
             // -编辑方法
-            MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder(Constants.HELPER_METHOD_NAME)
+            MethodSpec.Builder methodBuilder = MethodSpec.methodBuilder(Constants.POINT_MODULE_HELPER_METHOD_NAME)
                     .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
                     .returns(ArrayList.class)
                     .addStatement("ArrayList<" + Constants.TEST_ENTRY_POINT_INFO + "> list = new ArrayList<>()");
-            printMessageInfo("process=for=start");
             for (Element element : elements) {
-                printMessageInfo("process=for=item=" + element.getSimpleName().toString());
                 int type = 0;
                 String className = null;
                 String methodName = null;
@@ -67,22 +63,18 @@ public class TestEntryPointProcessor extends AbstractProcessor {
                     // 类或者接口
                     TypeElement typeElement = (TypeElement) element;
                     className = typeElement.getQualifiedName().toString();
-                    printMessageInfo("process=for=item=class=className=" + className);
                     if (isSubtypeActivity(typeElement)) {
                         // Activity
                         type = 1;
-                        printMessageInfo("process=for=item=class=activity");
                     } else if (isSubtypeFragment(typeElement)) {
                         // Fragment
                         type = 2;
-                        printMessageInfo("process=for=item=class=Fragment");
                     } else if (isSubtypeSupportFragment(typeElement)) {
                         // Support Fragment
                         type = 3;
-                        printMessageInfo("process=for=item=class=Support Fragment");
                     } else {
                         // 其它类型，不支持，报错提示
-                        printMessageError("TestEntryPoint 类注解只支持Activity、Fragment", element);
+                        printMessageError("标记在类上，只支持Activity、Fragment", element);
                     }
                 } else if (element.getKind() == ElementKind.METHOD) {
                     // 方法
@@ -94,24 +86,22 @@ public class TestEntryPointProcessor extends AbstractProcessor {
                     methodName = executableElement.getSimpleName().toString();
                     // -方法参数
                     List<? extends VariableElement> parameters = executableElement.getParameters();
-                    printMessageInfo("process=for=item=method=name=" + element.getSimpleName().toString());
                     if (parameters == null || parameters.size() == 0) {
                         // 无参方法
                         Set<Modifier> modifierSet = element.getModifiers();
                         if (modifierSet.contains(Modifier.STATIC)) {
                             // 静态方法
                             type = 4;
-                        } else if (isSubtypeTestListActivity(typeElement)) {
+                        } else if (isSubtypeTestListFragment(typeElement)) {
                             // 非静态方法，并且是TestListActivity的子类
                             type = 5;
                         } else {
                             // 其它类型，不支持，报错提示
-                            printMessageError("TestEntryPoint 方法注解只支持静态无参方法、非静态无参方法（必须是TestListActivity的子类）", element);
+                            printMessageError("标记在【方法】上，只支持【静态无参方法】或者【继承TestListFragment类的，非静态无参方法】", element);
                         }
-                        printMessageInfo("process=for=item=method=methodName=" + methodName);
                     } else {
                         // 有参方法，不支持，报错提示
-                        printMessageError("TestEntryPoint 方法注解只支持无参方法", element);
+                        printMessageError("标记在【方法】上，只支持【静态无参方法】或者【继承TestListFragment类的，非静态无参方法】", element);
                     }
                 }
                 if (type != 0) {
@@ -123,14 +113,13 @@ public class TestEntryPointProcessor extends AbstractProcessor {
             }
             methodBuilder.addStatement("return list");
             // -编辑类
-            printMessageInfo("class=start");
-            TypeSpec classSpec = TypeSpec.classBuilder(Constants.HELPER_CLASS_NAME)
+            TypeSpec classSpec = TypeSpec.classBuilder(Constants.POINT_MODULE_HELPER_CLASS_NAME)
                     .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                     .addMethod(methodBuilder.build())
                     .build();
             // -编辑JavaFile
-            printMessageInfo("File=start");
-            String packageName = Constants.HELPER_PACKAGE_PREFIX + testModelName.replaceAll("[-_]", ".");// replaceAll解决名称含有[-][_]
+            String packageName = Constants.POINT_MODULE_HELPER_PACKAGE_PREFIX
+                    + testModelName.replaceAll("[-_]", ".");// replaceAll解决名称含有[-][_]
             JavaFile javaFile = JavaFile.builder(packageName, classSpec)
                     .build();
             try {
@@ -138,9 +127,7 @@ public class TestEntryPointProcessor extends AbstractProcessor {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            printMessageInfo("File=end");
         }
-        printMessageInfo("process=end");
         return false;
     }
 
@@ -172,16 +159,12 @@ public class TestEntryPointProcessor extends AbstractProcessor {
                 processingEnv.getTypeUtils().isSubtype(element.asType(), processingEnv.getElementUtils().getTypeElement(Constants.FRAGMENT_SUPPORT_V4).asType());
     }
 
-    // 是否是TestListActivity子类型
-    private boolean isSubtypeTestListActivity(TypeElement element) {
-        return processingEnv.getTypeUtils().isSubtype(element.asType(), processingEnv.getElementUtils().getTypeElement(Constants.TEST_LIST_ACTIVITY).asType());
+    // 是否是TestListFragment子类型
+    private boolean isSubtypeTestListFragment(TypeElement element) {
+        return processingEnv.getTypeUtils().isSubtype(element.asType(), processingEnv.getElementUtils().getTypeElement(Constants.TEST_LIST_FRAGMENT).asType());
     }
 
     private void printMessageError(String message, Element element) {
-        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, message, element);
-    }
-
-    private void printMessageInfo(String message) {
-//        processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, "TestPoint::Compiler " + message);
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, "【" + TestEntryPoint.class.getSimpleName() + "】注解" + message, element);
     }
 }

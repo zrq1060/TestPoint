@@ -1,0 +1,4 @@
+<resources>
+    <string name="test_list_label">Test</string>
+    <string name="test_fragment_details_label">TestFragmentDetails</string>
+</resources>

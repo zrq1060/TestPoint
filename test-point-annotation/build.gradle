@@ -1,8 +1,21 @@
 plugins {
     id 'java-library'
+    id 'com.github.panpf.bintray-publish'
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+publish {
+    userOrg = 'zrq'
+    repoName = "TestPoint"
+
+    desc = 'This is a test-point-annotation library'
+    website = 'https://github.com/zrq1060/TestPoint'
+
+    groupId = 'com.zrq'
+    artifactId = 'test-point-annotation'
+    publishVersion = "$publish_version"
 }

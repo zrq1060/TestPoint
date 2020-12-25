@@ -4,10 +4,26 @@
 
     <application>
         <activity
-            android:name=".TestListActivity"
-            android:screenOrientation="portrait" />
+            android:name=".list.TestListActivity"
+            android:icon="@mipmap/test_ic_launcher"
+            android:label="@string/test_list_label"
+            android:roundIcon="@mipmap/test_ic_launcher_round"
+            android:screenOrientation="portrait"
+            android:taskAffinity="com.zrq.test.point.${applicationId}">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
-            android:name=".TestDesActivity"
+            android:name=".details.TestFragmentDetailsActivity"
+            android:label="@string/test_fragment_details_label"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name="com.zrq.test.point.init.InitContentProvider"
+            android:authorities="${applicationId}.test-point-init"
+            android:exported="false" />
     </application>
 </manifest>

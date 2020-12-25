@@ -32,12 +32,12 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
+
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     // test point
     implementation project(':test-point-annotation')
-    implementation project(':test-point-api')
-    annotationProcessor project(':test-point-compiler')
+    debugImplementation project(':test-point-api')
+    debugAnnotationProcessor project(':test-point-compiler')
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="test_list_item_title_text_color">#000000</color>
+    <color name="test_list_item_title_background">#F2F2F2</color>
+
+    <color name="test_list_item_content_text_color">#000000</color>
+    <color name="test_list_item_content_background">#FFFFFF</color>
+
+    <color name="test_list_activity_background">#F2F2F2</color>
+</resources>
