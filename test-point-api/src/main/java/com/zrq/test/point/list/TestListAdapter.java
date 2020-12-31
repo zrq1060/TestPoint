@@ -1,5 +1,6 @@
 package com.zrq.test.point.list;
 
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -22,14 +23,12 @@ import java.util.List;
  * createTime 2020/12/22 16:25
  */
 public class TestListAdapter extends RecyclerView.Adapter<TestListViewHolder> {
-    private final List<TestListItem> list;
+    private final List<TestListItem> list = new ArrayList<>();
     private OnItemClickListener<TestEntryPointInfo> onAnnotationsItemClickListener;
-    private boolean isCustomItemAdded;
 
     public TestListAdapter(List<TestListItem> list) {
-        if (list == null)
-            list = new ArrayList<>();
-        this.list = list;
+        if (list != null && list.size() > 0)
+            this.list.addAll(list);
     }
 
     @NonNull
@@ -99,13 +98,25 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListViewHolder> {
     /**
      * 手动调用，增加一条数据
      */
-    public void addItem(String title, View.OnClickListener clickListener) {
-        if (!isCustomItemAdded) {
-            // 未增加，先增加Title，进行区分
-            list.add(new TestListItem(1, "custom", null, null));
-            isCustomItemAdded = true;
-        }
-        list.add(new TestListItem(3, title, null, clickListener));
+    public void addItem(String moduleName, String title, View.OnClickListener clickListener) {
+        list.add(getAddPosition(moduleName), new TestListItem(3, title, null, clickListener));
         notifyDataSetChanged();
+    }
+
+    private int getAddPosition(String moduleName) {
+        boolean isFindNextTitle = false;
+        for (int i = 0; i < list.size(); i++) {
+            TestListItem item = list.get(i);
+            if (item.getItemType() == 1 && TextUtils.equals(item.getTitle(), moduleName)) {
+                // 是title类型并且是此title，获取此Title下的最后一个
+                isFindNextTitle = true;
+                continue;// 退出此次循环，不走下面逻辑
+            }
+            if (isFindNextTitle && item.getItemType() == 1) {
+                // 找到了下一个Title，返回此位置，即在此位置新增
+                return i;
+            }
+        }
+        return list.size();
     }
 }

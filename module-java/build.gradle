@@ -37,7 +37,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     // test point
-    implementation project(':test-point-annotation')
-    debugImplementation project(':test-point-api')
-    debugAnnotationProcessor project(':test-point-compiler')
+//    implementation project(':test-point-annotation')
+//    debugImplementation project(':test-point-api')
+//    debugAnnotationProcessor project(':test-point-compiler')
+    // xxx替换成最新版本, 各库版本相同
+    implementation "com.zrq:test-point-annotation:$publish_version"
+    debugImplementation "com.zrq:test-point-api:$publish_version"
+    debugAnnotationProcessor "com.zrq:test-point-compiler:$publish_version"
 }

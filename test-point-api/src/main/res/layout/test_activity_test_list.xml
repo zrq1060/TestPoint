@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fl_test_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/test_list_activity_background" />
+    android:background="@color/test_list_activity_background">
+
+    <FrameLayout
+        android:id="@+id/fl_test_list_custom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_test_list_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</FrameLayout>

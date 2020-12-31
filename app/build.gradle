@@ -57,7 +57,11 @@ dependencies {
     implementation project(':module-java')
     implementation project(':module-kotlin')
     // test point
-    implementation project(':test-point-annotation')
-    debugImplementation project(':test-point-api')
-    kaptDebug project(':test-point-compiler')
+//    implementation project(':test-point-annotation')
+//    debugImplementation project(':test-point-api')
+//    kaptDebug project(':test-point-compiler')
+    // xxx替换成最新版本, 各库版本相同
+    implementation "com.zrq:test-point-annotation:$publish_version"
+    debugImplementation "com.zrq:test-point-api:$publish_version"
+    kaptDebug "com.zrq:test-point-compiler:$publish_version"
 }

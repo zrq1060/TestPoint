@@ -18,20 +18,6 @@ import java.util.Collection;
 public class GeneratedClassesUtils {
 
     /**
-     * 获取自定义的【TestListFragment】类名
-     */
-    public static String getCustomTestListFragmentClassName() {
-        // CustomTestListFragmentHelper getName
-        try {
-            Class<?> helperClass = Class.forName(Constants.CUSTOM_LIST_FRAGMENT_HELPER_PACKAGE + "." + Constants.CUSTOM_LIST_FRAGMENT_HELPER_CLASS_NAME);
-            Method helperMethod = helperClass.getMethod(Constants.CUSTOM_LIST_FRAGMENT_HELPER_METHOD_NAME);
-            return (String) helperMethod.invoke(helperClass);
-        } catch (Exception ignored) {
-        }
-        return null;
-    }
-
-    /**
      * 获取自定义的【TestFragmentDetailsActivity】类名
      */
     public static String getCustomTestFragmentDetailsActivityClassName() {
@@ -81,4 +67,23 @@ public class GeneratedClassesUtils {
         }
         return list;
     }
+
+
+    /**
+     * 获取此模块下自定义的【TestListFragment】类名
+     */
+    public static String getCustomTestListFragmentClassName(String moduleName) {
+        // CustomTestListFragmentHelper getName
+        try {
+            Class<?> helperClass = Class.forName(Constants.CUSTOM_LIST_FRAGMENT_HELPER_PACKAGE_PREFIX
+                    + moduleName.replaceAll("[-_]", ".")// replaceAll解决名称含有[-][_]
+                    + "."
+                    + Constants.CUSTOM_LIST_FRAGMENT_HELPER_CLASS_NAME);
+            Method helperMethod = helperClass.getMethod(Constants.CUSTOM_LIST_FRAGMENT_HELPER_METHOD_NAME);
+            return (String) helperMethod.invoke(helperClass);
+        } catch (Exception ignored) {
+        }
+        return null;
+    }
+
 }

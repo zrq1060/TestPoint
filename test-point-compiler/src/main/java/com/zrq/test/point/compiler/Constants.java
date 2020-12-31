@@ -28,7 +28,7 @@ public class Constants {
     public static final String MODULES_NAME_HELPER_CLASS_NAME = "TestEnterModulesNameHelper";// 类名
     public static final String MODULES_NAME_HELPER_METHOD_NAME = "getList";// 方法名
     // -Custom TestListFragment Helper
-    public static final String CUSTOM_LIST_FRAGMENT_HELPER_PACKAGE = "com.zrq.test.point";// 包名
+    public static final String CUSTOM_LIST_FRAGMENT_HELPER_PACKAGE_PREFIX = "com.zrq.test.point.";// 包前缀名
     public static final String CUSTOM_LIST_FRAGMENT_HELPER_CLASS_NAME = "CustomTestListFragmentHelper";// 类名
     public static final String CUSTOM_LIST_FRAGMENT_HELPER_METHOD_NAME = "getName";// 方法名
     // -Custom TestFragmentDetailsActivity Helper

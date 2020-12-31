@@ -1,5 +1,6 @@
 package com.zrq.test.point.init;
 
+import com.zrq.test.point.entity.CustomTestListFragmentInfo;
 import com.zrq.test.point.entity.TestEntryPointInfo;
 import com.zrq.test.point.entity.TestListItem;
 import com.zrq.test.point.utils.GeneratedClassesUtils;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 public class TestEntryPointInit {
     private static final ArrayList<TestListItem> allModuleTestListData = new ArrayList<>();
+    private static final ArrayList<CustomTestListFragmentInfo> allCustomTestListFragmentListData = new ArrayList<>();
 
     public static void init() {
         ArrayList<String> moduleNames = GeneratedClassesUtils.getTestModuleNameList();
@@ -21,21 +23,23 @@ public class TestEntryPointInit {
             return;
         }
         for (String moduleName : moduleNames) {
-            try {
-                // 增加title
-                allModuleTestListData.add(new TestListItem(1, moduleName, null, null));
-                // 增加child（注解生成信息）
-                ArrayList<TestEntryPointInfo> testEnterPointModuleList = GeneratedClassesUtils.getTestEnterPointModuleList(moduleName);
-                for (TestEntryPointInfo info : testEnterPointModuleList) {
-                    allModuleTestListData.add(new TestListItem(2, null, info, null));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            // 增加title
+            allModuleTestListData.add(new TestListItem(1, moduleName, null, null));
+            // 增加child（注解生成信息）
+            ArrayList<TestEntryPointInfo> testEnterPointModuleList = GeneratedClassesUtils.getTestEnterPointModuleList(moduleName);
+            for (TestEntryPointInfo info : testEnterPointModuleList) {
+                allModuleTestListData.add(new TestListItem(2, null, info, null));
             }
+            // CustomTestListFragment
+            allCustomTestListFragmentListData.add(new CustomTestListFragmentInfo(moduleName, GeneratedClassesUtils.getCustomTestListFragmentClassName(moduleName)));
         }
     }
 
     public static ArrayList<TestListItem> getAllModuleTestListData() {
         return allModuleTestListData;
+    }
+
+    public static ArrayList<CustomTestListFragmentInfo> getAllCustomTestListFragmentListData() {
+        return allCustomTestListFragmentListData;
     }
 }
