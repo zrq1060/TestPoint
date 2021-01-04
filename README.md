@@ -35,7 +35,7 @@
 	}
 
 	dependencies {
-		// xxx替换成最新版本, 各库版本相同
+	    // xxx替换成最新版本, 各库版本相同
 	    implementation 'com.zrq:test-point-annotation:xxx'
 	    debugImplementation 'com.zrq:test-point-api:xxx'
 	    debugAnnotationProcessor 'com.zrq:test-point-compiler:xxx'
@@ -82,13 +82,13 @@ public class App extends Application {
 ```
 @TestEntryPoint("登录")
 public class LoginActivity extends AppCompatActivity {
-	...
+    ...
 }
 ```
 ```
 @TestEntryPoint("我的")
 public class MineFragment extends Fragment {
-	...
+    ...
 }
 ```
 
@@ -106,7 +106,7 @@ public class Test {
 
     @TestEntryPoint("App-静态方法")
     public static void test1() {
-		...
+        ...
     }
 }
 ```
@@ -125,7 +125,7 @@ public class Test {
 ```
 @TestEntryPointListFragment
 public class MyTestListFragment extends TestListFragment {
-	...
+    ...
 }
 ```
 
@@ -169,7 +169,7 @@ public class MyTestListFragment extends TestListFragment {
 | :-- | :-- | :-- | :-- |
 | TestEntryPoint | 标记测试进入点 | Activity、<br/>Fragment、<br/>静态无参方法、<br/>TestListFragment子类非静态无参方法 | 任意位置使用 |
 | TestEntryPointModules | 标记要测试的模块名称 | 可放到任意类上 | 全局唯一 |
-| TestEntryPointListFragment | 标记自定义<br/>TestListFragment点 | 只能是继承<br/>TestListFragment的类 | 模块下唯一<br/>（一个module下只能有一个） |
+| TestEntryPointListFragment | 标记自定义<br/>TestListFragment点 | 只能是继承<br/>TestListFragment的类 | module下唯一 |
 | TestEntryPointFragmentDetailsActivity | 标记自定义<br/>TestFragmentDetailsActivity点 | 只能是继承<br/>TestFragmentDetailsActivity的类 | 全局唯一 |
 
 ### 五、Q&A
