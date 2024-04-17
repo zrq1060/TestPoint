@@ -18,13 +18,12 @@ import java.util.Collection;
 public class GeneratedClassesUtils {
 
     /**
-     * 获取自定义的【TestFragmentDetailsActivity】类名
+     * 获取自定义的【TestFragmentDetailsActivity】类名，只有一个。
      */
     public static String getCustomTestFragmentDetailsActivityClassName() {
-        // CustomTestFragmentDetailsActivityHelper getName
         try {
-            Class<?> helperClass = Class.forName(Constants.CUSTOM_FRAGMENT_DETAILS_HELPER_PACKAGE + "." + Constants.CUSTOM_FRAGMENT_DETAILS_HELPER_CLASS_NAME);
-            Method helperMethod = helperClass.getMethod(Constants.CUSTOM_FRAGMENT_DETAILS_HELPER_METHOD_NAME);
+            Class<?> helperClass = Class.forName(Constants.TEST_ENTRY_POINT_FRAGMENT_DETAILS_HELPER_PACKAGE + "." + Constants.TEST_ENTRY_POINT_FRAGMENT_DETAILS_HELPER_CLASS_NAME);
+            Method helperMethod = helperClass.getMethod(Constants.TEST_ENTRY_POINT_FRAGMENT_DETAILS_HELPER_METHOD_NAME);
             return (String) helperMethod.invoke(helperClass);
         } catch (Exception ignored) {
         }
@@ -32,14 +31,13 @@ public class GeneratedClassesUtils {
     }
 
     /**
-     * 获取测试模块名列表
+     * 获取测试模块名列表，只有一个。
      */
     public static ArrayList<String> getTestModuleNameList() {
-        // TestEnterModulesNameHelper getList
         ArrayList<String> list = new ArrayList<>();
         try {
-            Class<?> helperClass = Class.forName(Constants.MODULES_NAME_HELPER_PACKAGE + "." + Constants.MODULES_NAME_HELPER_CLASS_NAME);
-            Method helperMethod = helperClass.getMethod(Constants.MODULES_NAME_HELPER_METHOD_NAME);
+            Class<?> helperClass = Class.forName(Constants.TEST_ENTRY_POINT_MODULES_HELPER_PACKAGE + "." + Constants.TEST_ENTRY_POINT_MODULES_HELPER_CLASS_NAME);
+            Method helperMethod = helperClass.getMethod(Constants.TEST_ENTRY_POINT_MODULES_HELPER_METHOD_NAME);
             list.addAll((Collection<String>) helperMethod.invoke(helperClass));
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,19 +46,18 @@ public class GeneratedClassesUtils {
     }
 
     /**
-     * 获取此模块下的【TestEntryPointInfo】列表
+     * 获取此模块下的【TestEntryPointInfo】列表，一个模块下多个。
      */
-    public static ArrayList<TestEntryPointInfo> getTestEnterPointModuleList(String moduleName) {
-        // TestEnterPointModuleHelper getList
+    public static ArrayList<TestEntryPointInfo> getTestEntryPointModuleList(String moduleName) {
         ArrayList<TestEntryPointInfo> list = new ArrayList<>();
         if (!TextUtils.isEmpty(moduleName)) {
             // 数据ok，获取
             try {
-                Class<?> helperClass = Class.forName(Constants.POINT_MODULE_HELPER_PACKAGE_PREFIX
+                Class<?> helperClass = Class.forName(Constants.TEST_ENTRY_POINT_HELPER_PACKAGE_PREFIX
                         + moduleName.replaceAll("[-_]", ".")// replaceAll解决名称含有[-][_]
                         + "."
-                        + Constants.POINT_MODULE_HELPER_CLASS_NAME);
-                Method helperMethod = helperClass.getMethod(Constants.POINT_MODULE_HELPER_METHOD_NAME);
+                        + Constants.TEST_ENTRY_POINT_HELPER_CLASS_NAME);
+                Method helperMethod = helperClass.getMethod(Constants.TEST_ENTRY_POINT_HELPER_METHOD_NAME);
                 list.addAll((Collection<TestEntryPointInfo>) helperMethod.invoke(helperClass));
             } catch (Exception ignored) {
             }
@@ -70,20 +67,20 @@ public class GeneratedClassesUtils {
 
 
     /**
-     * 获取此模块下自定义的【TestListFragment】类名
+     * 获取此模块下自定义的【TestListFragment】类名，一个模块下多个。
      */
-    public static String getCustomTestListFragmentClassName(String moduleName) {
-        // CustomTestListFragmentHelper getName
+    public static ArrayList<String> getCustomTestListFragmentClassName(String moduleName) {
+        ArrayList<String> list = new ArrayList<>();
         try {
-            Class<?> helperClass = Class.forName(Constants.CUSTOM_LIST_FRAGMENT_HELPER_PACKAGE_PREFIX
+            Class<?> helperClass = Class.forName(Constants.TEST_ENTRY_POINT_LIST_FRAGMENT_HELPER_PACKAGE_PREFIX
                     + moduleName.replaceAll("[-_]", ".")// replaceAll解决名称含有[-][_]
                     + "."
-                    + Constants.CUSTOM_LIST_FRAGMENT_HELPER_CLASS_NAME);
-            Method helperMethod = helperClass.getMethod(Constants.CUSTOM_LIST_FRAGMENT_HELPER_METHOD_NAME);
-            return (String) helperMethod.invoke(helperClass);
+                    + Constants.TEST_ENTRY_POINT_LIST_FRAGMENT_HELPER_CLASS_NAME);
+            Method helperMethod = helperClass.getMethod(Constants.TEST_ENTRY_POINT_LIST_FRAGMENT_HELPER_METHOD_NAME);
+            list.addAll((Collection<String>) helperMethod.invoke(helperClass));
         } catch (Exception ignored) {
         }
-        return null;
+        return list;
     }
 
 }

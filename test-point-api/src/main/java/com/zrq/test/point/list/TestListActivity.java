@@ -49,7 +49,7 @@ public class TestListActivity extends AppCompatActivity {
     private void initCustomTestListFragment() {
         // 设置所有CustomTestListFragment显示
         ArrayList<CustomTestListFragmentInfo> customTestListFragmentInfoList = TestEntryPointInit.getAllCustomTestListFragmentListData();
-        if (customTestListFragmentInfoList != null && customTestListFragmentInfoList.size() > 0) {
+        if (customTestListFragmentInfoList != null && !customTestListFragmentInfoList.isEmpty()) {
             // 有CustomTestListFragment，add到View
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             for (CustomTestListFragmentInfo customTestListFragmentInfo : customTestListFragmentInfoList) {

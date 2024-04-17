@@ -1,17 +1,15 @@
 plugins {
-    id 'com.android.library'
-    id 'com.github.panpf.bintray-publish'
+    alias(libs.plugins.androidLibrary)
+    id 'com.vanniktech.maven.publish'
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    namespace 'com.zrq.test.point'
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -23,28 +21,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility libs.versions.javaVersion.get().toInteger()
+        targetCompatibility libs.versions.javaVersion.get().toInteger()
+    }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'// 用implementation，使其引入此库时【不引入】此依赖项
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'// 用implementation，使其引入此库时【不引入】此依赖项
-
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation libs.appcompat// 用implementation，使其引入此库时【不引入】此依赖项
+    implementation libs.androidx.recyclerview// 用implementation，使其引入此库时【不引入】此依赖项
 
     // test-point-annotation
     api project(':test-point-annotation')// 用api，使其引入此库时【引入】此依赖项
-}
-
-publish {
-    userOrg = 'zrq'
-    repoName = "TestPoint"
-
-    desc = 'This is a test-point-api library'
-    website = 'https://github.com/zrq1060/TestPoint'
-
-    groupId = 'com.zrq'
-    artifactId = 'test-point-api'
-    publishVersion = "$publish_version"
 }

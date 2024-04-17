@@ -19,19 +19,22 @@ public class TestEntryPointInit {
 
     public static void init() {
         ArrayList<String> moduleNames = GeneratedClassesUtils.getTestModuleNameList();
-        if (moduleNames == null || moduleNames.size() == 0) {
+        if (moduleNames.isEmpty()) {
             return;
         }
         for (String moduleName : moduleNames) {
             // 增加title
             allModuleTestListData.add(new TestListItem(1, moduleName, null, null));
             // 增加child（注解生成信息）
-            ArrayList<TestEntryPointInfo> testEnterPointModuleList = GeneratedClassesUtils.getTestEnterPointModuleList(moduleName);
-            for (TestEntryPointInfo info : testEnterPointModuleList) {
+            ArrayList<TestEntryPointInfo> testEntryPointModuleList = GeneratedClassesUtils.getTestEntryPointModuleList(moduleName);
+            for (TestEntryPointInfo info : testEntryPointModuleList) {
                 allModuleTestListData.add(new TestListItem(2, null, info, null));
             }
             // CustomTestListFragment
-            allCustomTestListFragmentListData.add(new CustomTestListFragmentInfo(moduleName, GeneratedClassesUtils.getCustomTestListFragmentClassName(moduleName)));
+            ArrayList<String> customTestListFragmentClassNameList = GeneratedClassesUtils.getCustomTestListFragmentClassName(moduleName);
+            for (String fragmentClassName : customTestListFragmentClassNameList) {
+                allCustomTestListFragmentListData.add(new CustomTestListFragmentInfo(moduleName, fragmentClassName));
+            }
         }
     }
 

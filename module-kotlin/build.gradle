@@ -1,7 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.kotlinAndroid)
     id 'kotlin-kapt'
+    alias(libs.plugins.ksp)
 }
 
 kapt {
@@ -9,16 +10,16 @@ kapt {
         arg("TEST_MODULE_NAME", project.getName())
     }
 }
-
+ksp {
+    arg("TEST_MODULE_NAME", project.getName())
+}
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    namespace 'com.zrq.test.point.demo.kotlin'
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdk libs.versions.minSdk.get().toInteger()
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -30,21 +31,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility libs.versions.javaVersion.get().toInteger()
+        targetCompatibility libs.versions.javaVersion.get().toInteger()
+    }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation libs.kotlin.stdlib
+    implementation libs.appcompat
 
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.test.ext.junit
+    androidTestImplementation libs.espresso.core
     // test point
-//    implementation project(':test-point-annotation')
-//    debugImplementation project(':test-point-api')
-//    kaptDebug project(':test-point-compiler')
-    // xxx替换成最新版本, 各库版本相同
-    implementation "com.zrq:test-point-annotation:$publish_version"
-    debugImplementation "com.zrq:test-point-api:$publish_version"
-    kaptDebug "com.zrq:test-point-compiler:$publish_version"
+    if (isDependenciesLocalProject.toBoolean()) {
+        implementation project(':test-point-annotation')
+        debugImplementation project(':test-point-api')
+        if (isUseKsp.toBoolean()) kspDebug project(':test-point-ksp') else kaptDebug project(':test-point-compiler')
+    } else {
+        implementation libs.test.point.annotation
+        debugImplementation libs.test.point.api
+        if (isUseKsp.toBoolean()) kspDebug libs.test.point.ksp else kaptDebug libs.test.point.compiler
+    }
 }

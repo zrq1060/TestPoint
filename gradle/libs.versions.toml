@@ -1,0 +1,71 @@
+[versions]
+#================================Android版本相关===================================
+compileSdk = "34"
+minSdk = "16"
+targetSdk = "34"
+versionCode = "1"
+versionName = "1.0"
+javaVersion = "19"
+#================================插件版本相关===================================
+agp = "8.3.2"
+kotlin = "1.9.23"
+ksp = "1.9.23-1.0.19"
+publish = "0.28.0"
+#================================Test版本相关===================================
+junit = "4.13.2"
+androidx-test-ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+#================================TestPoint版本相关===================================
+#testPoint = "0.0.1-test4-SNAPSHOT"
+testPoint = "0.0.1-test4"
+#================================其他版本相关===================================
+appcompat = "1.6.1"
+material = "1.11.0"
+recyclerview = "1.3.2"
+autoService = "1.1.1"
+javapoet = "1.13.0"
+kotlinpoet = "1.16.0"
+hilt = "2.51.1"
+
+[libraries]
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
+# test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+# auto-service
+auto-service = { module = "com.google.auto.service:auto-service", version.ref = "autoService" }
+auto-service-annotations = { module = "com.google.auto.service:auto-service-annotations", version.ref = "autoService" }
+# javapoet、kotlinpoet
+javapoet = { module = "com.squareup:javapoet", version.ref = "javapoet" }
+kotlinpoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinpoet" }
+# ksp
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+# test-point
+test-point-annotation = { group = "io.github.zrq1060", name = "test-point-annotation", version.ref = "testPoint" }
+test-point-api = { group = "io.github.zrq1060", name = "test-point-api", version.ref = "testPoint" }
+test-point-compiler = { group = "io.github.zrq1060", name = "test-point-compiler", version.ref = "testPoint" }
+test-point-ksp = { group = "io.github.zrq1060", name = "test-point-ksp", version.ref = "testPoint" }
+
+# hilt
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+
+
+[plugins]
+# android
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+# kotlin
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+# ksp
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+# publish
+publish = { id = "com.vanniktech.maven.publish", version.ref = "publish" }
+
+# hilt-android
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

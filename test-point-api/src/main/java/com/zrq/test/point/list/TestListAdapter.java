@@ -1,5 +1,6 @@
 package com.zrq.test.point.list;
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListViewHolder> {
     private OnItemClickListener<TestEntryPointInfo> onAnnotationsItemClickListener;
 
     public TestListAdapter(List<TestListItem> list) {
-        if (list != null && list.size() > 0)
+        if (list != null && !list.isEmpty())
             this.list.addAll(list);
     }
 
@@ -52,12 +53,9 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListViewHolder> {
             holder.itemContent.setVisibility(View.VISIBLE);
             final TestEntryPointInfo annotationsInfo = item.getAnnotationsInfo();
             holder.itemContent.setText(annotationsInfo != null ? annotationsInfo.getName() : null);
-            holder.itemContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onAnnotationsItemClickListener != null && annotationsInfo != null)
-                        onAnnotationsItemClickListener.onItemClick(v, annotationsInfo);
-                }
+            holder.itemContent.setOnClickListener(v -> {
+                if (onAnnotationsItemClickListener != null && annotationsInfo != null)
+                    onAnnotationsItemClickListener.onItemClick(v, annotationsInfo);
             });
         } else {
             // custom（手动添加点击）
@@ -98,6 +96,7 @@ public class TestListAdapter extends RecyclerView.Adapter<TestListViewHolder> {
     /**
      * 手动调用，增加一条数据
      */
+    @SuppressLint("NotifyDataSetChanged")
     public void addItem(String moduleName, String title, View.OnClickListener clickListener) {
         list.add(getAddPosition(moduleName), new TestListItem(3, title, null, clickListener));
         notifyDataSetChanged();

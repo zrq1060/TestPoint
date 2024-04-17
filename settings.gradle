@@ -1,7 +1,25 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+//        maven { url "https://s01.oss.sonatype.org/content/repositories/iogithubzrq1060-1010" }
+    }
+}
+
+rootProject.name = "TestPoint"
+
 include ':test-point-compiler'
+include ':test-point-ksp'
 include ':test-point-api'
 include ':test-point-annotation'
 include ':module-kotlin'
 include ':module-java'
 include ':app'
-rootProject.name = "TestPoint"
