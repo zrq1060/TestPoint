@@ -16,16 +16,25 @@ object Test {
     fun test1() {
         Log.e("TestEntryPoint", "module-kotlin-object-静态方法")
     }
-//    @TestEntryPoint("module-kotlin-object-静态方法")
-    // TODO 改
-    @JvmStatic
-    fun String.test2() {
-        Log.e("TestEntryPoint", "module-kotlin-object-静态方法")
+
+//    @TestEntryPoint("module-kotlin-扩展方法")
+//    @JvmStatic
+//    fun String.test2() {
+//        Log.e("TestEntryPoint", "module-kotlin-object-静态方法")
+//    }
+}
+
+class Test1 {
+    companion object {
+        @TestEntryPoint("module-kotlin-伴生对象-静态方法")
+        @JvmStatic
+        fun test2() {
+            Log.e("TestEntryPoint", "module-kotlin-伴生对象-静态方法")
+        }
     }
 }
 
-// TODO 改
-@TestEntryPoint("module-kotlin-包级函数-静态方法")
-fun test2() {
-    Log.e("TestEntryPoint", "module-kotlin-包级函数-静态方法")
-}
+//@TestEntryPoint("module-kotlin-包级函数-静态方法")
+//fun test2() {
+//    Log.e("TestEntryPoint", "module-kotlin-包级函数-静态方法")
+//}

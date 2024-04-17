@@ -36,7 +36,7 @@ class TestEntryPointAllProcessor : AbstractProcessor() {
             // 未设置TEST_MODEL_NAME，报错提醒
             processingEnv.printMessageError(
                 TestEntryPoint::class,
-                "此 module【2222build.gradle】未设置【" + Constants.TEST_MODULE_NAME + "】参数",
+                "此 module【build.gradle】未设置【" + Constants.TEST_MODULE_NAME + "】参数",
                 null
             )
         }

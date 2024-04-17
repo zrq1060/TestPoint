@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -82,6 +83,7 @@ public class TestListActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), Class.forName(item.getClassName())));
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "跳转异常", Toast.LENGTH_SHORT).show();
                     }
                 } else if (item.getType() == 2 || item.getType() == 3) {
                     // Fragment、Support Fragment
@@ -98,6 +100,7 @@ public class TestListActivity extends AppCompatActivity {
                             startActivity(intent);
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "跳转异常", Toast.LENGTH_SHORT).show();
                         }
                     }
                 } else if (item.getType() == 4 || item.getType() == 5) {
@@ -109,6 +112,7 @@ public class TestListActivity extends AppCompatActivity {
                         method.invoke(item.getType() == 4 ? clazz : getSupportFragmentManager().findFragmentByTag(item.getClassName()));
                     } catch (Exception e) {
                         e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "调用方法异常", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

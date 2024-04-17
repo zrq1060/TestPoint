@@ -5,7 +5,8 @@ minSdk = "16"
 targetSdk = "34"
 versionCode = "1"
 versionName = "1.0"
-javaVersion = "19"
+# TODO 判断是否要用多少？
+javaVersion = "17"
 #================================插件版本相关===================================
 agp = "8.3.2"
 kotlin = "1.9.23"

@@ -20,7 +20,7 @@ class TestEntryPointAllSymbolProcessorProvider : SymbolProcessorProvider {
         if (testModelName.isNullOrEmpty()) {
             // 未设置TEST_MODEL_NAME，报错提醒
             logger.error(
-                "此 module【11build.gradle】未设置【" + Constants.TEST_MODULE_NAME + "】参数",
+                "此 module【build.gradle】未设置【" + Constants.TEST_MODULE_NAME + "】参数",
                 null
             )
         }
