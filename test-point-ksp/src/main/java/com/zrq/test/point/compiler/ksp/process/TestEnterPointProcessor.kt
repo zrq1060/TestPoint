@@ -8,6 +8,7 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
+import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.Modifier
 import com.google.devtools.ksp.validate
@@ -30,11 +31,22 @@ fun processTestEntryPoint(
 ): List<KSAnnotated> {
     val sequenceKSAnnotated =
         resolver.getSymbolsWithAnnotation(TestEntryPoint::class.qualifiedName!!)
+    // TODO 问题：ksp实现，再次运行，只有变化的类，之前的没有了。问题2：该用哪个版本的Ksp。3：文档要更新。
+    logger.info(
+        "aaaaaaaaaa=" + testModelName + "=" + sequenceKSAnnotated.count()
+            .toString() + "=" + sequenceKSAnnotated.joinToString()
+    )
     if (sequenceKSAnnotated.count() > 0) {
         // 有数据
         createClass(testModelName, codeGenerator, sequenceKSAnnotated, logger)
     }
-    return sequenceKSAnnotated.filter { !it.validate() }.toList()
+    return sequenceKSAnnotated.filter {
+        !it.validate().apply {
+            logger.info(
+                "aaaaaaaaaa=" + testModelName + "=========filter=" + it + "=validate=" + it.validate()
+            )
+        }
+    }.toList()
 }
 
 @OptIn(KspExperimental::class)
@@ -87,7 +99,7 @@ private fun createClass(
                 // 方法参数为空
                 // -类名
                 val typeElement = ksAnnotated.parentDeclaration // 父元素
-                targetClassName = typeElement.getQualifiedName()
+                targetClassName = typeElement.getQualifiedClassName()
                 // -方法名
                 targetMethodName = ksAnnotated.simpleName.asString()
                 if (typeElement == null) {
@@ -142,11 +154,10 @@ private fun KSFunctionDeclaration.isFunParametersEmpty() =
     parameters.isEmpty() && extensionReceiver == null
 
 private fun KSFunctionDeclaration.isFunStatic() =
-// 修饰符里包含静态修饰符，兼容是Java类。
-    // 方法注解里面有JvmStatic，兼容是Kotlin类。
+    // 修饰符里包含静态修饰符，兼容是Java类。方法注解里面有JvmStatic，兼容是Kotlin类。
     modifiers.contains(Modifier.JAVA_STATIC) || annotations.any { it.shortName.asString() == "JvmStatic" }
 
-private fun KSDeclaration?.getQualifiedName(): String? {
+private fun KSDeclaration?.getQualifiedClassName(): String? {
     // 兼容伴生对象的全路径名称带有".Companion"
     var qualifiedNameStr = this?.qualifiedName?.asString()
     if (this != null) {

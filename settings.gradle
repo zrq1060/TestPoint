@@ -10,7 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-//        maven { url "https://s01.oss.sonatype.org/content/repositories/iogithubzrq1060-1010" }
+        maven { url 'https://s01.oss.sonatype.org/service/local/repositories/snapshots/content/' }
     }
 }
 

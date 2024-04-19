@@ -13,7 +13,7 @@ import dagger.hilt.android.HiltAndroidApp;
  * createTime 2020/12/7 16:41
  */
 @TestEntryPointModules({"app", "module-java", "module-kotlin"})
-@HiltAndroidApp
+//@HiltAndroidApp
 public class App extends Application {
 
 }

@@ -6,8 +6,8 @@ plugins {
 }
 
 java {
-    sourceCompatibility libs.versions.javaVersion.get().toInteger()
-    targetCompatibility libs.versions.javaVersion.get().toInteger()
+    sourceCompatibility libs.versions.libraryJavaVersion.get().toString()
+    targetCompatibility libs.versions.libraryJavaVersion.get().toString()
 }
 dependencies {
     // test-point-annotation
@@ -16,7 +16,7 @@ dependencies {
     compileOnly libs.auto.service.annotations// 用compileOnly，只编译时用
     kapt libs.auto.service
     // 生成java，用此库，没用kotlin库，是因为调用方，可能没使用kotlin。
-    implementation libs.javapoet// 用implementation
+    implementation libs.javapoet// 用implementation，runtime时引用。
     // ksp
-    implementation libs.ksp.api // 用implementation
+    implementation libs.ksp.api // 用implementation，runtime时引用。
 }

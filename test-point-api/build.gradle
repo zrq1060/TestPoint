@@ -22,8 +22,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility libs.versions.javaVersion.get().toInteger()
-        targetCompatibility libs.versions.javaVersion.get().toInteger()
+        sourceCompatibility libs.versions.javaVersion.get().toString()
+        targetCompatibility libs.versions.javaVersion.get().toString()
     }
 }
 

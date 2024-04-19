@@ -1,14 +1,14 @@
 package com.zrq.test.point.compiler.annotationprocessor.process
 
 import com.zrq.test.point.annotation.TestEntryPoint
-import com.zrq.test.point.compiler.common.TestEntryPointInfo
 import com.zrq.test.point.compiler.annotationprocessor.ktx.createJavaClass
-import com.zrq.test.point.compiler.common.createClassTestEntryPointHelper
 import com.zrq.test.point.compiler.annotationprocessor.ktx.isSubtypeActivity
 import com.zrq.test.point.compiler.annotationprocessor.ktx.isSubtypeFragment
 import com.zrq.test.point.compiler.annotationprocessor.ktx.isSubtypeSupportFragment
 import com.zrq.test.point.compiler.annotationprocessor.ktx.isSubtypeTestListFragment
 import com.zrq.test.point.compiler.annotationprocessor.ktx.printMessageError
+import com.zrq.test.point.compiler.common.TestEntryPointInfo
+import com.zrq.test.point.compiler.common.createClassTestEntryPointHelper
 import javax.annotation.processing.ProcessingEnvironment
 import javax.annotation.processing.RoundEnvironment
 import javax.lang.model.element.Element
@@ -68,18 +68,16 @@ private fun createClass(
             }
         } else if (element.kind == ElementKind.METHOD) {
             // 方法
-            // -类名
-            val typeElement = element.enclosingElement as TypeElement // 父元素
-            className = typeElement.qualifiedName.toString()
-            // -方法名
             val executableElement = element as ExecutableElement
-            methodName = executableElement.simpleName.toString()
             // -方法参数
-            val parameters = executableElement.parameters
-            if (parameters == null || parameters.isEmpty()) {
+            if (executableElement.isFunParametersEmpty()) {
                 // 无参方法
-                val modifierSet = element.getModifiers()
-                if (modifierSet.contains(Modifier.STATIC)) {
+                // -类名
+                val typeElement = element.enclosingElement as TypeElement // 父元素
+                className = executableElement.getQualifiedClassName()
+                // -方法名
+                methodName = executableElement.simpleName.toString()
+                if (executableElement.isFunStatic()) {
                     // 静态方法
                     type = 4
                 } else if (processingEnv.isSubtypeTestListFragment(typeElement)) {
@@ -110,5 +108,33 @@ private fun createClass(
         }
     }
 
-    processingEnv.createJavaClass(createClassTestEntryPointHelper(testModelName, testEntryPointInfoList))
+    processingEnv.createJavaClass(
+        createClassTestEntryPointHelper(
+            testModelName,
+            testEntryPointInfoList
+        )
+    )
+}
+
+private fun ExecutableElement.isFunParametersEmpty() = parameters == null || parameters.isEmpty()
+
+private fun ExecutableElement.isFunStatic() =
+    // 修饰符里包含静态修饰符，兼容是Java类。方法注解里面有JvmStatic，兼容是Kotlin类。
+    modifiers.contains(Modifier.STATIC) || !getAnnotationsByType(JvmStatic::class.java).isNullOrEmpty()
+
+private fun ExecutableElement?.getQualifiedClassName(): String? {
+    val typeElement = this?.enclosingElement as? TypeElement // 父元素
+
+    // 兼容伴生对象的全路径名称带有".Companion"
+    var qualifiedNameStr = typeElement?.qualifiedName?.toString()
+
+    if (this != null) {
+        if (!getAnnotationsByType(JvmStatic::class.java).isNullOrEmpty()
+            && qualifiedNameStr?.endsWith(".Companion") == true
+        ) {
+            // 半生对象
+            qualifiedNameStr = qualifiedNameStr.replace(".Companion", "")
+        }
+    }
+    return qualifiedNameStr
 }

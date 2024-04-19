@@ -4,6 +4,6 @@ plugins {
 }
 
 java {
-    sourceCompatibility libs.versions.javaVersion.get().toInteger()
-    targetCompatibility libs.versions.javaVersion.get().toInteger()
+    sourceCompatibility libs.versions.libraryJavaVersion.get().toString()
+    targetCompatibility libs.versions.libraryJavaVersion.get().toString()
 }

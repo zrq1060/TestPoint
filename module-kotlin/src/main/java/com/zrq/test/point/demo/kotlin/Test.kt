@@ -26,6 +26,7 @@ object Test {
 
 class Test1 {
     companion object {
+
         @TestEntryPoint("module-kotlin-伴生对象-静态方法")
         @JvmStatic
         fun test2() {
@@ -34,6 +35,7 @@ class Test1 {
     }
 }
 
+// kapt实现支持，ksp实现目前不支持。
 //@TestEntryPoint("module-kotlin-包级函数-静态方法")
 //fun test2() {
 //    Log.e("TestEntryPoint", "module-kotlin-包级函数-静态方法")

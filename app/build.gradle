@@ -46,10 +46,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility libs.versions.javaVersion.get().toInteger()
-        targetCompatibility libs.versions.javaVersion.get().toInteger()
+        sourceCompatibility libs.versions.javaVersion.get().toString()
+        targetCompatibility libs.versions.javaVersion.get().toString()
     }
-
+    kotlinOptions {
+        jvmTarget = libs.versions.JavaVersion.get().toString()
+    }
 }
 
 dependencies {
@@ -74,6 +76,7 @@ dependencies {
         if (isUseKsp.toBoolean()) kspDebug libs.test.point.ksp else kaptDebug libs.test.point.compiler
     }
 
+    // hilt，添加此为了解决注解处理器和Hilt冲突。
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 }

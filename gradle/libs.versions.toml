@@ -6,7 +6,8 @@ targetSdk = "34"
 versionCode = "1"
 versionName = "1.0"
 # TODO 判断是否要用多少？
-javaVersion = "17"
+javaVersion = "19"
+libraryJavaVersion = "19"
 #================================插件版本相关===================================
 agp = "8.3.2"
 kotlin = "1.9.23"
@@ -18,7 +19,7 @@ androidx-test-ext-junit = "1.1.5"
 espresso-core = "3.5.1"
 #================================TestPoint版本相关===================================
 #testPoint = "0.0.1-test4-SNAPSHOT"
-testPoint = "0.0.1-test4"
+testPoint = "0.0.1-test5-SNAPSHOT"
 #================================其他版本相关===================================
 appcompat = "1.6.1"
 material = "1.11.0"
