@@ -23,6 +23,7 @@ public class TestFragmentDetailsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_activity_test_fragment_details);
+        if (savedInstanceState != null) return; // 配置变更，则不重新进行替换布局，Fragment会自恢复。
         String fragmentClassName = getIntent().getStringExtra(KEY_FRAGMENT_CLASS_NAME);
         try {
             Object instance = Class.forName(fragmentClassName).newInstance();

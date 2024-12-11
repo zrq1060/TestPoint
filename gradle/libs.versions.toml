@@ -1,7 +1,7 @@
 [versions]
 #================================Android版本相关===================================
 compileSdk = "34"
-minSdk = "16"
+minSdk = "21"
 targetSdk = "34"
 versionCode = "1"
 versionName = "1.0"
@@ -9,24 +9,24 @@ versionName = "1.0"
 javaVersion = "21"
 libraryJavaVersion = "21"
 #================================插件版本相关===================================
-agp = "8.3.2"
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
+agp = "8.7.3"
+kotlin = "2.0.21"
+ksp = "2.0.21-1.0.26"
 publish = "0.28.0"
 #================================Test版本相关===================================
 junit = "4.13.2"
-androidx-test-ext-junit = "1.1.5"
-espresso-core = "3.5.1"
+androidx-test-ext-junit = "1.2.1"
+espresso-core = "3.6.1"
 #================================TestPoint版本相关===================================
 #testPoint = "0.0.1-test4-SNAPSHOT"
 testPoint = "0.0.1-test5-SNAPSHOT"
 #================================其他版本相关===================================
-appcompat = "1.6.1"
-material = "1.11.0"
+appcompat = "1.7.0"
+material = "1.12.0"
 recyclerview = "1.3.2"
 autoService = "1.1.1"
 javapoet = "1.13.0"
-hilt = "2.51.1"
+hilt = "2.52"
 
 [libraries]
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
