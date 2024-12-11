@@ -31,7 +31,7 @@ public class TestFragmentDetailsActivity extends AppCompatActivity {
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.fl_test_details, (androidx.fragment.app.Fragment) instance)
-                        .commitAllowingStateLoss();
+                        .commitNow();
             } else {
                 // Fragment
                 getFragmentManager()

@@ -8,7 +8,6 @@ import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSDeclaration
-import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.Modifier
 import com.google.devtools.ksp.validate
@@ -31,22 +30,15 @@ fun processTestEntryPoint(
 ): List<KSAnnotated> {
     val sequenceKSAnnotated =
         resolver.getSymbolsWithAnnotation(TestEntryPoint::class.qualifiedName!!)
-    // TODO 问题：ksp实现，再次运行，只有变化的类，之前的没有了。问题2：该用哪个版本的Ksp。3：文档要更新。
-    logger.info(
-        "aaaaaaaaaa=" + testModelName + "=" + sequenceKSAnnotated.count()
-            .toString() + "=" + sequenceKSAnnotated.joinToString()
+    logger.printMessageInfo(
+        testModelName,
+        "count=${sequenceKSAnnotated.count()}，${sequenceKSAnnotated.joinToString()}"
     )
     if (sequenceKSAnnotated.count() > 0) {
         // 有数据
         createClass(testModelName, codeGenerator, sequenceKSAnnotated, logger)
     }
-    return sequenceKSAnnotated.filter {
-        !it.validate().apply {
-            logger.info(
-                "aaaaaaaaaa=" + testModelName + "=========filter=" + it + "=validate=" + it.validate()
-            )
-        }
-    }.toList()
+    return sequenceKSAnnotated.filter { !it.validate() }.toList()
 }
 
 @OptIn(KspExperimental::class)
@@ -136,6 +128,7 @@ private fun createClass(
             val name = ksAnnotated.getAnnotationsByType(TestEntryPoint::class).first().value
             testEntryPointInfoList.add(
                 TestEntryPointInfo(
+
                     type, name, targetClassName ?: "", targetMethodName
                 )
             )
@@ -171,4 +164,8 @@ private fun KSDeclaration?.getQualifiedClassName(): String? {
 
 private fun KSPLogger.printMessageError(message: String, symbol: KSAnnotated) {
     error("【" + TestEntryPoint::class.simpleName + "】注解" + message, symbol)
+}
+
+private fun KSPLogger.printMessageInfo(testModelName: String, message: String) {
+    info("【" + TestEntryPoint::class.simpleName + "】注解，testModelName=$testModelName，$message")
 }

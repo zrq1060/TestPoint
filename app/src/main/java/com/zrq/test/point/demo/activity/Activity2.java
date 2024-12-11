@@ -15,7 +15,7 @@ import com.zrq.test.point.annotation.TestEntryPoint;
  * @author zhangrq
  * createTime 2020/12/7 16:52
  */
-@TestEntryPoint("App-原生-Activity")
+@TestEntryPoint("App-原生-Activity22222222")
 public class Activity2 extends Activity {
 
     @Override

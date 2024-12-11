@@ -5,8 +5,7 @@
         <activity
             android:name=".activity.MyTestFragmentDetailsActivity"
             android:exported="false"
-            android:label="@string/test_fragment_details_label"
-            android:screenOrientation="portrait" />
+            android:label="@string/test_fragment_details_label" />
     </application>
 
 </manifest>

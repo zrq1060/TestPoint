@@ -31,13 +31,11 @@ class TestEntryPointAllSymbolProcessor(
         // TestEntryPointFragmentDetailsActivity
         val ret4 = processTestEntryPointFragmentDetailsActivity(logger, codeGenerator, resolver)
 
-        // TODO，看返回值是什么意思？
         val ret = mutableListOf<KSAnnotated>()
         ret.addAll(ret1)
         ret.addAll(ret2)
         ret.addAll(ret3)
         ret.addAll(ret4)
-
         return ret
     }
 }

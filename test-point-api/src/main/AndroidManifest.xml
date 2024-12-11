@@ -8,7 +8,6 @@
             android:icon="@mipmap/test_ic_launcher"
             android:label="@string/test_list_label"
             android:roundIcon="@mipmap/test_ic_launcher_round"
-            android:screenOrientation="portrait"
             android:taskAffinity="com.zrq.test.point.${applicationId}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,8 +17,7 @@
         </activity>
         <activity
             android:name=".details.TestFragmentDetailsActivity"
-            android:label="@string/test_fragment_details_label"
-            android:screenOrientation="portrait" />
+            android:label="@string/test_fragment_details_label" />
 
         <provider
             android:name="com.zrq.test.point.init.InitContentProvider"
