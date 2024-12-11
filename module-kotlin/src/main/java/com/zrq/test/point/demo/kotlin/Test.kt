@@ -17,6 +17,7 @@ object Test {
         Log.e("TestEntryPoint", "module-kotlin-object-静态方法")
     }
 
+    // kapt、ksp都不支持。
 //    @TestEntryPoint("module-kotlin-扩展方法")
 //    @JvmStatic
 //    fun String.test2() {
