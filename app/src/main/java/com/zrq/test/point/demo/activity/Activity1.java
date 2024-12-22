@@ -31,7 +31,7 @@ public class Activity1 extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(getApplicationContext());
-        textView.setText("App-Support-Activity");
+        textView.setText("App-Support-Activity，name=" + getIntent().getStringExtra("name"));
         textView.setTextSize(100);
         textView.setTextColor(Color.RED);
         setContentView(textView);

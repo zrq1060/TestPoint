@@ -1,8 +1,8 @@
 [versions]
 #================================Android版本相关===================================
-compileSdk = "34"
+compileSdk = "35"
 minSdk = "21"
-targetSdk = "34"
+targetSdk = "35"
 versionCode = "1"
 versionName = "1.0"
 # TODO 判断是否要用多少？
@@ -10,8 +10,8 @@ javaVersion = "21"
 libraryJavaVersion = "21"
 #================================插件版本相关===================================
 agp = "8.7.3"
-kotlin = "2.0.21"
-ksp = "2.0.21-1.0.26"
+kotlin = "2.1.0"
+ksp = "2.1.0-1.0.29"
 publish = "0.28.0"
 #================================Test版本相关===================================
 junit = "4.13.2"
@@ -26,7 +26,7 @@ material = "1.12.0"
 recyclerview = "1.3.2"
 autoService = "1.1.1"
 javapoet = "1.13.0"
-hilt = "2.52"
+hilt = "2.53.1"
 
 [libraries]
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }

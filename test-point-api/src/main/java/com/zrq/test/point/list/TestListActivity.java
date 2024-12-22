@@ -90,13 +90,13 @@ public class TestListActivity extends AppCompatActivity {
                     String customDetailsClassName = GeneratedClassesUtils.getCustomTestFragmentDetailsActivityClassName();
                     if (TextUtils.isEmpty(customDetailsClassName)) {
                         // 无自定义，使用TestFragmentDetailsActivity
-                        startActivity(TestFragmentDetailsActivity.newIntent(getApplicationContext(), item.getClassName()));
+                        startActivity(TestFragmentDetailsActivity.newIntent(getApplicationContext(), item.getClassName(), null));
                     } else {
                         // 有自定义，使用自定义
                         try {
                             Class<?> customDetailsClass = Class.forName(customDetailsClassName);
                             Intent intent = new Intent(getApplicationContext(), customDetailsClass);
-                            intent.putExtras(TestFragmentDetailsActivity.newBundle(item.getClassName()));
+                            intent.putExtras(TestFragmentDetailsActivity.newBundle(item.getClassName(), null));
                             startActivity(intent);
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();

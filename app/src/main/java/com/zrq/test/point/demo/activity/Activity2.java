@@ -22,7 +22,7 @@ public class Activity2 extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(getApplicationContext());
-        textView.setText("App-原生-Activity");
+        textView.setText("App-原生-Activity，name=" + getIntent().getStringExtra("name"));
         textView.setTextSize(100);
         textView.setTextColor(Color.RED);
         setContentView(textView);

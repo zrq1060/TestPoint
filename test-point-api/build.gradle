@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     id 'com.vanniktech.maven.publish'
+    alias(libs.plugins.kotlinAndroid)
 }
 
 android {
@@ -24,6 +25,9 @@ android {
     compileOptions {
         sourceCompatibility libs.versions.javaVersion.get().toString()
         targetCompatibility libs.versions.javaVersion.get().toString()
+    }
+    kotlinOptions {
+        jvmTarget = libs.versions.JavaVersion.get().toString()
     }
 }
 
