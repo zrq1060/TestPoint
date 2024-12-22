@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.zrq.test.point.annotation.TestEntryPoint;
+import com.zrq.test.point.demo.util.Utils;
 
 /**
  * 描述：
@@ -25,8 +26,8 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         TextView textView = new TextView(container.getContext());
-        textView.setText("App-Support-Fragment，name=" + getArguments().getString("name"));
-        textView.setTextSize(100);
+        textView.setText("App-Support-Fragment" + Utils.getFragmentArgs(getArguments()));
+        textView.setTextSize(70);
         textView.setTextColor(Color.RED);
         return textView;
     }

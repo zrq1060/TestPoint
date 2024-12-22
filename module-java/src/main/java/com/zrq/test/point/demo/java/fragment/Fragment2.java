@@ -26,7 +26,7 @@ public class Fragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         TextView textView = new TextView(container.getContext());
         textView.setText("module-java-原生-Fragment");
-        textView.setTextSize(100);
+        textView.setTextSize(70);
         textView.setTextColor(Color.RED);
         return textView;
     }

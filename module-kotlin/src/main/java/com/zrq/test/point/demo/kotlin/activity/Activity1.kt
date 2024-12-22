@@ -19,7 +19,7 @@ class Activity1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val textView = TextView(applicationContext)
         textView.text = "module-kotlin-Support-Activity"
-        textView.textSize = 100f
+        textView.textSize = 70f
         textView.setTextColor(Color.RED)
         setContentView(textView)
     }

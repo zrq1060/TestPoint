@@ -19,16 +19,15 @@ import com.zrq.test.point.utils.GeneratedClassesUtils
  * createTime 2020/12/22 17:23
  */
 open class TestListFragment : Fragment() {
-    private var moduleName: String? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        moduleName = arguments?.getString(KEY_MODULE_NAME)
-    }
+    private val moduleName by lazy { arguments?.getString(KEY_MODULE_NAME)!! }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         onAddTestViews()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 
     /**
@@ -44,19 +43,23 @@ open class TestListFragment : Fragment() {
      * @param clickListener 点击事件
      */
     fun addItem(title: String?, clickListener: View.OnClickListener?) {
-        (activity as TestListActivity).adapter.addItem(moduleName, title, clickListener)
+        (activity as TestListActivity).adapter?.addItem(moduleName, title, clickListener)
     }
 
     fun addItem(title: String, clazz: Class<*>, vararg args: Pair<String, Any>) {
-        val bundle = bundleOf(*args)
+        val bundle = if (args.isNotEmpty()) bundleOf(*args) else null
         addItem(title) {
             if (Activity::class.java.isAssignableFrom(clazz)) {
                 // Activity
                 try {
-                    startActivity(Intent(context, clazz).putExtras(bundle))
+                    startActivity(Intent(requireContext(), clazz).apply {
+                        if (bundle != null) {
+                            putExtras(bundle)
+                        }
+                    })
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    Toast.makeText(context, "跳转异常", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "跳转异常", Toast.LENGTH_SHORT).show()
                 }
             } else if (android.app.Fragment::class.java.isAssignableFrom(clazz)
                 || androidx.fragment.app.Fragment::class.java.isAssignableFrom(clazz)
@@ -68,7 +71,7 @@ open class TestListFragment : Fragment() {
                     // 无自定义，使用TestFragmentDetailsActivity
                     startActivity(
                         TestFragmentDetailsActivity.newIntent(
-                            context,
+                            requireContext(),
                             clazz.canonicalName,
                             bundle
                         )
@@ -76,8 +79,8 @@ open class TestListFragment : Fragment() {
                 } else {
                     // 有自定义，使用自定义
                     try {
-                        val customDetailsClass = Class.forName(customDetailsClassName)
-                        val intent = Intent(context, customDetailsClass)
+                        val customDetailsClass = Class.forName(customDetailsClassName!!)
+                        val intent = Intent(requireContext(), customDetailsClass)
                         intent.putExtras(
                             TestFragmentDetailsActivity.newBundle(
                                 clazz.canonicalName,
@@ -87,7 +90,7 @@ open class TestListFragment : Fragment() {
                         startActivity(intent)
                     } catch (e: ClassNotFoundException) {
                         e.printStackTrace()
-                        Toast.makeText(context, "跳转异常", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "跳转异常", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

@@ -1,4 +1,4 @@
-package com.zrq.test.point.demo
+package com.zrq.test.point.demo.util
 
 import javax.inject.Inject
 

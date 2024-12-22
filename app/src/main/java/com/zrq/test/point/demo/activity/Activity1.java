@@ -9,7 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.zrq.test.point.annotation.TestEntryPoint;
-import com.zrq.test.point.demo.User;
+import com.zrq.test.point.demo.util.User;
+import com.zrq.test.point.demo.util.Utils;
 
 import javax.inject.Inject;
 
@@ -31,8 +32,8 @@ public class Activity1 extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(getApplicationContext());
-        textView.setText("App-Support-Activity，name=" + getIntent().getStringExtra("name"));
-        textView.setTextSize(100);
+        textView.setText("App-Support-Activity" + Utils.getActivityArgs(getIntent()));
+        textView.setTextSize(70);
         textView.setTextColor(Color.RED);
         setContentView(textView);
 

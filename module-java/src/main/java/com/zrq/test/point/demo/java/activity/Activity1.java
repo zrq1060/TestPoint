@@ -23,7 +23,7 @@ public class Activity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(getApplicationContext());
         textView.setText("module-java-Support-Activity");
-        textView.setTextSize(100);
+        textView.setTextSize(70);
         textView.setTextColor(Color.RED);
         setContentView(textView);
     }

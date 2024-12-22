@@ -23,7 +23,7 @@ public class Activity2 extends Activity {
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(getApplicationContext());
         textView.setText("module-java-原生-Activity");
-        textView.setTextSize(100);
+        textView.setTextSize(70);
         textView.setTextColor(Color.RED);
         setContentView(textView);
     }

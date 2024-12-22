@@ -21,7 +21,7 @@ class Fragment2 : Fragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val textView = TextView(container!!.context)
         textView.text = "module-kotlin-原生-Fragment"
-        textView.textSize = 100f
+        textView.textSize = 70f
         textView.setTextColor(Color.RED)
         return textView
     }
