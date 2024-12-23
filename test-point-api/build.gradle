@@ -23,11 +23,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility libs.versions.javaVersion.get().toString()
-        targetCompatibility libs.versions.javaVersion.get().toString()
+        sourceCompatibility libs.versions.libraryJavaVersion.get().toString()
+        targetCompatibility libs.versions.libraryJavaVersion.get().toString()
     }
     kotlinOptions {
-        jvmTarget = libs.versions.JavaVersion.get().toString()
+        jvmTarget = libs.versions.libraryJavaVersion.get().toString()
     }
 }
 
