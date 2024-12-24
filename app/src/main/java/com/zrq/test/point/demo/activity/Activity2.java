@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.zrq.test.point.annotation.TestEntryPoint;
-import com.zrq.test.point.demo.util.Utils;
 
 /**
  * 描述：
@@ -23,7 +22,7 @@ public class Activity2 extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TextView textView = new TextView(getApplicationContext());
-        textView.setText("App-原生-Activity" + Utils.getActivityArgs(getIntent()));
+        textView.setText("App-原生-Activity");
         textView.setTextSize(70);
         textView.setTextColor(Color.RED);
         setContentView(textView);

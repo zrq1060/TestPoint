@@ -33,13 +33,13 @@ open class TestListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onAddTestViews()
+        onAddTestItems()
     }
 
     /**
      * 增加测试Item，内部调用【addItem】
      */
-    open fun onAddTestViews() {
+    open fun onAddTestItems() {
     }
 
     /**

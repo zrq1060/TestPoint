@@ -17,7 +17,7 @@ import com.zrq.test.point.list.TestListFragment;
 public class MyTestListFragment2 extends TestListFragment {
 
     @Override
-    public void onAddTestViews() {
+    public void onAddTestItems() {
         addItem("app-手动添加方法-2", new View.OnClickListener() {
             @Override
             public void onClick(View v) {

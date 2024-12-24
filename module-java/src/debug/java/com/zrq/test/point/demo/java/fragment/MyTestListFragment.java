@@ -16,7 +16,7 @@ import com.zrq.test.point.list.TestListFragment;
 @TestEntryPointListFragment
 public class MyTestListFragment extends TestListFragment {
     @Override
-    public void onAddTestViews() {
+    public void onAddTestItems() {
         addItem("module-java-手动添加方法", new View.OnClickListener() {
             @Override
             public void onClick(View v) {

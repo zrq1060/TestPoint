@@ -13,7 +13,7 @@ import com.zrq.test.point.list.TestListFragment
  */
 @TestEntryPointListFragment
 class MyTestListFragment : TestListFragment() {
-    override fun onAddTestViews() {
+    override fun onAddTestItems() {
         addItem("module-kotlin-手动添加方法") {
             Toast.makeText(context, "module-kotlin-手动添加方法", Toast.LENGTH_SHORT).show()
         }

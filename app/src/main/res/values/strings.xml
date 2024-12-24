@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TestPoint</string>
+
+    <string name="test_list_label">MyTest</string>
 </resources>
