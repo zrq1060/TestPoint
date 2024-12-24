@@ -69,7 +69,8 @@ class TestListActivity : AppCompatActivity() {
         recyclerView.layoutManager = GridLayoutManager(
             applicationContext, 3
         )
-        adapter = TestListAdapter(TestEntryPointInit.allModuleTestListData)
+        adapter = TestListAdapter()
+        adapter?.submitList(TestEntryPointInit.allModuleTestListData)
         recyclerView.adapter = adapter
         // 设置注解信息item点击监听
         adapter!!.setOnAnnotationsItemClickListener(object :

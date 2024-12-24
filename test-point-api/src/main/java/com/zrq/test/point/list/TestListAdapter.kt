@@ -17,8 +17,8 @@ import com.zrq.test.point.listener.OnItemClickListener
  * @author zhangrq
  * createTime 2020/12/22 16:25
  */
-class TestListAdapter(val list: ArrayList<TestListItem>) :
-    RecyclerView.Adapter<TestListViewHolder>() {
+class TestListAdapter : RecyclerView.Adapter<TestListViewHolder>() {
+    private val list: ArrayList<TestListItem> = arrayListOf()
     private var onAnnotationsItemClickListener: OnItemClickListener<TestEntryPointInfo>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestListViewHolder {
@@ -72,6 +72,11 @@ class TestListAdapter(val list: ArrayList<TestListItem>) :
                 }
             }
         }
+    }
+
+    fun submitList(list: List<TestListItem>) {
+        this.list.clear()
+        this.list.addAll(list)
     }
 
     /**
