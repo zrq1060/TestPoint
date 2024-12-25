@@ -20,27 +20,6 @@
 
 ## 1.添加依赖和配置
 
-* **kapt**
-
-  ``` gradle
-  // 可以参考 module-kotlin 模块中的写法
-  plugins {
-      id 'kotlin-kapt'
-  }
-
-  kapt {
-      arguments {
-          arg("TEST_MODULE_NAME", project.getName())
-      }
-  }
-
-  dependencies {
-      implementation 'io.github.zrq1060:test-point-annotation:0.0.1-alpha03'
-      debugImplementation 'io.github.zrq1060:test-point-api:0.0.1-alpha03'
-      kaptDebug 'io.github.zrq1060:test-point-compiler:0.0.1-alpha03'
-  }
-  ```
-
 * **ksp（推荐）**
 
   ``` gradle
@@ -48,11 +27,11 @@
   plugins {
       alias(libs.plugins.ksp)
   }
-
+  
   ksp {
       arg("TEST_MODULE_NAME", project.getName())
   }
-
+  
   dependencies {
       implementation 'io.github.zrq1060:test-point-annotation:0.0.1-alpha03'
       debugImplementation 'io.github.zrq1060:test-point-api:0.0.1-alpha03'
@@ -65,6 +44,27 @@
   ksp.incremental=false
   ```
 
+* **kapt**
+
+  ``` gradle
+  // 可以参考 module-kotlin 模块中的写法
+  plugins {
+      id 'kotlin-kapt'
+  }
+  
+  kapt {
+      arguments {
+          arg("TEST_MODULE_NAME", project.getName())
+      }
+  }
+  
+  dependencies {
+      implementation 'io.github.zrq1060:test-point-annotation:0.0.1-alpha03'
+      debugImplementation 'io.github.zrq1060:test-point-api:0.0.1-alpha03'
+      kaptDebug 'io.github.zrq1060:test-point-compiler:0.0.1-alpha03'
+  }
+  ```
+  
 ## 2.标记要测试的模块
 
 在任意类上添加`TestEntryPointModules`注解，标明要测试的`module名`（没传值，默认为`当前模块`）。例如在`App`上添加
@@ -150,17 +150,17 @@ public class MyTestListFragment extends TestListFragment {
 
 ```kotlin
 @TestEntryPointListFragment
-class MyTestListFragment : TestListFragment() {
+class MyTestListFragment1 : TestListFragment() {
 
     override fun onAddTestItems() {
         addItem("Activity1-无参", Activity1::class.java)
         addItem("Fragment1-无参", Fragment1::class.java)
 
-        addItem("Activity2-有参", Activity2::class.java, "name" to "张三", "age" to 20)
-        addItem("Fragment2-有参", Fragment2::class.java, "name" to "张三", "age" to 20)
+        addItem("Activity1-有参", Activity1::class.java, "name" to "张三", "age" to 20)
+        addItem("Fragment1-有参", Fragment1::class.java, "name" to "张三", "age" to 20)
 
-        addItem("自定义"){
-            // 点击此按钮，执行此方法。 
+        addItem("自定义") {
+            // 点击此按钮，执行此方法。
         }
     }
 }
@@ -172,9 +172,10 @@ class MyTestListFragment : TestListFragment() {
 
 ## 4.其它
 ### 4.1.指定Fragment详情页
-如果你要跳转的`Fragment`需要支持`Hilt`，则可以使用此方式指定使用自定义的`TestFragmentDetailsActivity`。
+如果你要跳转的`Fragment`有添加`@AndroidEntryPoint`注解，则承载其的`Activity`也需要添加`@AndroidEntryPoint`注解，则可以使用此方式指定使用自定义的`TestFragmentDetailsActivity`。
 
 ```java
+@AndroidEntryPoint
 @TestEntryPointFragmentDetailsActivity
 public class MyTestFragmentDetailsActivity extends TestFragmentDetailsActivity {
     @Override
@@ -184,16 +185,17 @@ public class MyTestFragmentDetailsActivity extends TestFragmentDetailsActivity {
 }
 ```
 ### 4.2.定制Test应用的名字
-覆盖`test_list_label`的字符串
+如果你有多模块并都使用了此库，则可以定制每个Test应用的名称，需覆盖`test_list_label`的默认字符串即可。
 
-`strings.xml`内添加
+在app下`strings.xml`内添加
+
 ```
 <resources>
     <string name="test_list_label">Test App Name</string>
 </resources>
 ```
 
-或`build.gradle`内添加
+或在app下`build.gradle`内添加，可参考demo的app下的`build.gradle`配置。
 ```gradle
 resValue "string", "test_list_label", "Test App Name"
 ```
@@ -203,7 +205,7 @@ resValue "string", "test_list_label", "Test App Name"
 
 | 注解 | 功能说明 | 使用约束 | 数量支持 |
 | :-- | :-- | :-- | :-- |
-| `TestEntryPoint` | 标记测试进入点 | `Activity`、<br/>`Fragment`、<br/>`静态无参方法`、<br/>`TestListFragment子类非静态无参方法` | 无数个 |
+| `TestEntryPoint` | 标记测试进入点 | `Activity`、`Fragment`、`静态无参方法`、`TestListFragment子类非静态无参方法` | 无数个 |
 | `TestEntryPointModules` | 标记要测试的模块名称 | 可放到任意类上 | App内唯一 |
-| `TestEntryPointListFragment` | 标记自定义的<br/>`TestListFragment` | 继承`TestListFragment`的类 | 无数个 |
-| `TestEntryPointFragmentDetailsActivity` | 标记自定义的<br/>`TestFragmentDetailsActivity` | 继承`TestFragmentDetailsActivity`的类 | App内唯一 |
+| `TestEntryPointListFragment` | 标记自定义的`TestListFragment` | 继承`TestListFragment`的类 | 无数个 |
+| `TestEntryPointFragmentDetailsActivity` | 标记自定义的`TestFragmentDetailsActivity` | 继承`TestFragmentDetailsActivity`的类 | App内唯一 |

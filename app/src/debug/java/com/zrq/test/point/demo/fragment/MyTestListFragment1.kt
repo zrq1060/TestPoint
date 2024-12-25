@@ -22,7 +22,6 @@ class MyTestListFragment1 : TestListFragment() {
 
         addItem("自定义") {
             // 点击此按钮，执行此方法。
-//            SharedPreferences
 
         }
     }

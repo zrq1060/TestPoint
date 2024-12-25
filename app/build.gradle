@@ -75,12 +75,9 @@ dependencies {
         debugImplementation libs.test.point.api
         if (isUseKsp.toBoolean()) kspDebug libs.test.point.ksp else kaptDebug libs.test.point.compiler
     }
-
-    // 目前问题整理：
-    // 自己注解处理器使用ksp，不和hilt冲突（使用kapt、ksp引用hilt都不会冲突），但是ksp目前不支持包级函数-静态方法，例子：com.zrq.test.point.demo.kotlin.Test.test2()
-    // 自己注解处理器使用kapt，和hilt冲突（使用kapt、ksp引用hilt都会冲突），但是kapt支持全部。
-
-    // hilt，添加此为了解决注解处理器和Hilt冲突。
+    // hilt，添加此为了测试注解处理器和Hilt冲突。
+    // 推荐使用ksp，不和hilt冲突（使用kapt、ksp引用hilt都不会冲突），但是ksp目前仅不支持包级函数-静态方法，例子：com.zrq.test.point.demo.kotlin.Test.test2()
+    // 使用kapt，和hilt冲突（使用kapt、ksp引用hilt都会冲突），但是kapt支持全部使用。
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
 }
