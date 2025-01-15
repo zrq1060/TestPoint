@@ -33,9 +33,9 @@
   }
   
   dependencies {
-      implementation 'io.github.zrq1060:test-point-annotation:0.0.1-alpha03'
-      debugImplementation 'io.github.zrq1060:test-point-api:0.0.1-alpha03'
-      kspDebug 'io.github.zrq1060:test-point-ksp:0.0.1-alpha03'
+      implementation 'io.github.zrq1060:test-point-annotation:0.0.1'
+      debugImplementation 'io.github.zrq1060:test-point-api:0.0.1'
+      kspDebug 'io.github.zrq1060:test-point-ksp:0.0.1'
   }
   ```
   并在`gradle.properties`内添加如下
@@ -59,9 +59,9 @@
   }
   
   dependencies {
-      implementation 'io.github.zrq1060:test-point-annotation:0.0.1-alpha03'
-      debugImplementation 'io.github.zrq1060:test-point-api:0.0.1-alpha03'
-      kaptDebug 'io.github.zrq1060:test-point-compiler:0.0.1-alpha03'
+      implementation 'io.github.zrq1060:test-point-annotation:0.0.1'
+      debugImplementation 'io.github.zrq1060:test-point-api:0.0.1'
+      kaptDebug 'io.github.zrq1060:test-point-compiler:0.0.1'
   }
   ```
   
