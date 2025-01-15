@@ -3,6 +3,7 @@ package com.zrq.test.point.details
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.zrq.test.point.R
@@ -16,6 +17,7 @@ import com.zrq.test.point.R
 open class TestFragmentDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.test_activity_test_fragment_details)
         if (savedInstanceState != null) return  // 配置变更，则不重新进行替换布局，Fragment会自恢复。
 

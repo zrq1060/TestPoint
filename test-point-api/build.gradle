@@ -33,7 +33,8 @@ android {
 
 dependencies {
     implementation libs.appcompat// 用implementation，使其引入此库时【不引入】此依赖项
-    implementation libs.androidx.recyclerview// 用implementation，使其引入此库时【不引入】此依赖项
+    api libs.androidx.recyclerview// 用api，使其引入此库时【引入】此依赖项
+    api libs.androidx.activity// 用api，使其引入此库时【引入】此依赖项
 
     // test-point-annotation
     api project(':test-point-annotation')// 用api，使其引入此库时【引入】此依赖项

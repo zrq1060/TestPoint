@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +32,13 @@ class TestListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.test_activity_test_list)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rv_test_list_content)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         val recyclerView = findViewById<RecyclerView>(R.id.rv_test_list_content)
         // 初始化内容RecyclerView
         initContentRecyclerView(recyclerView) // 重建后需要重新初始化，因为adapter等已丢失

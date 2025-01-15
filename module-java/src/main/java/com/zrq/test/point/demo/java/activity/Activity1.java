@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,7 @@ public class Activity1 extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         TextView textView = new TextView(getApplicationContext());
         textView.setText("module-java-Support-Activity");
         textView.setTextSize(70);

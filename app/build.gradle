@@ -58,6 +58,7 @@ dependencies {
     implementation libs.kotlin.stdlib
     implementation libs.appcompat
     implementation libs.material
+    implementation libs.androidx.activity
 
     testImplementation libs.junit
     androidTestImplementation libs.androidx.test.ext.junit
